@@ -1,0 +1,102 @@
+﻿<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-6">
+    <div class="card mt-4">
+      <h4 class="card-header">Products
+        <a routerLink="/home" class="btn btn-warning float-right">Back</a>
+      </h4>
+      <form [formGroup]="Formdata" (ngSubmit)="handleForm()" novalidate>
+        <div class="card-body">
+          <div class="card-body">
+            <p class="col-sm-12 text-right requiredLabel"><span>Fields marked with <span class="asterisk_input"></span>
+                are mandatory.</span>
+            </p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Category<span class="asterisk_input"></span></label>
+                  <div class="input-group">
+                    <select type="text" name="category" formControlName="category" class="form-control"
+                      placeholder="Category">
+                      <option value="">Select Category</option>
+                      <option *ngFor="let c of categories" value="{{c._id}}">{{c.title}}</option>
+                    </select>
+                  </div>
+                  <div class="form-control-feedback text-danger" *ngIf="f.category.errors && submitted">
+                    <p *ngIf="f.category.errors.required">Please enter category</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Title<span class="asterisk_input"></span></label>
+                  <div class="input-group">
+                    <input type="text" name="title" formControlName="title" class="form-control" placeholder="Title">
+                  </div>
+                  <div class="form-control-feedback text-danger" *ngIf="f.title.errors && submitted">
+                    <p *ngIf="f.title.errors.required">Please enter title</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description<span class="asterisk_input"></span></label>
+                  <div class="input-group">
+                    <textarea type="text" rows="10" name="description" formControlName="description"
+                      class="form-control" placeholder="Description"></textarea>
+                  </div>
+                  <div class="form-control-feedback text-danger" *ngIf="f.description.errors && submitted">
+                    <p *ngIf="f.description.errors.required">Please enter description</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Price<span class="asterisk_input"></span></label>
+                  <input type="text" name="price" formControlName="price" class="form-control" placeholder="Price"
+                    pattern="^[0-9]{0,10}$">
+                  <div class="form-control-feedback text-danger" *ngIf="f.price.errors && submitted">
+                    <p *ngIf="f.price.errors.required">Please enter price</p>
+                    <p *ngIf="f.price.errors.pattern">Please enter valid price</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Discount<span class="asterisk_input"></span></label>
+                  <input type="text" name="discount" formControlName="discount" class="form-control"
+                    placeholder="Discount" pattern="^[0-9]{0,10}$" [(max)]="f.price.value">
+                  <div class="form-control-feedback text-danger" *ngIf="f.discount.errors && submitted">
+                    <p *ngIf="f.discount.errors.required">Please enter discount</p>
+                    <p *ngIf="f.discount.errors.pattern">Please enter valid discount</p>
+                    <p *ngIf="f.discount.errors.max">Please enter less amount than price</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label style="margin-top: -16px;">Image <span class="asterisk_input"></span></label>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="custom-file mt-1">
+                        <input type="file" name="push_image" (change)="onSelectFile($event)" formControlName="image"
+                          id="pushImageThumb" accept="image/*">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <img *ngIf="pushImageSource!=null" [src]="pushImageSource" class="rounded"
+                      onerror="this.src='assets/no-image.png'" height="170" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o fa-lg"></i> Save</button>&nbsp;
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

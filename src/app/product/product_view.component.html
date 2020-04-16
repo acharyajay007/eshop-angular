@@ -1,0 +1,36 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">Products
+      <a routerLink="/home" class="btn btn-warning float-right">Back</a>
+    </h4>
+    <div class="card-body">
+        <table class="table table-bordered" *ngIf="product">
+            <tr>
+              <th width="40%" colspan="2" rowspan="6">
+                  <img src="{{product.image}}" height="400">
+              </th>
+              <th width="30%">Title</th>
+              <td width="30%">{{product.title}}</td>
+            </tr>
+            <tr>
+              <th>Category</th>
+              <td>{{product.category.title}}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{product.description}}</td>
+            </tr>
+            <tr>
+              <th>Price</th>
+              <td>{{product.price}}</td>
+            </tr>
+            <tr>
+              <th>Discount</th>
+              <td>{{product.discount}}</td>
+            </tr>
+            <tr>
+              <th>Net Price</th>
+              <td>{{product.netprice}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

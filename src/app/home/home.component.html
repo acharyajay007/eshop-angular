@@ -1,0 +1,64 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">Products
+      <a class="btn btn-warning float-right" routerLink="/product/add">Add Product</a>
+    </h4>
+    <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Query</label>
+              <input class="form-control" [(ngModel)]="filter.query" placeholder="Query" name="query"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Min Price</label>
+              <input class="form-control" type="number" [(ngModel)]="filter.min_price" placeholder="Min Price" name="min_price"/>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>Max Price</label>
+              <input class="form-control" type="number" [(ngModel)]="filter.max_price" placeholder="Max Price" name="max_price"/>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <button class="btn btn-warning float-right"  type="button" (click)="rerender()">Search</button>
+          </div>
+        </div>
+        <br/>
+        <div class="table-responsive">
+          <table id="product_table" style="width: 100%;" datatable [dtOptions]="dtOptions" class="hover table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Discount</th>
+                <th class="text-center">Net price</th>
+                <th class="text-center">Created At</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products;let i=index;">
+                <td class="text-center">{{ product.title }}</td>
+                <td class="text-center">{{ product.category.title }}</td>
+                <td class="text-center">{{ product.price }}</td>
+                <td class="text-center">{{ product.discount }}</td>
+                <td class="text-center">{{ product.netprice }}</td>
+                <td class="text-center">{{ product.createdAt }}</td>
+                <td class="text-center">
+                    <a class="btn btn-primary" routerLink="/product/view/{{product._id}}" title="View">View</a> &nbsp;
+                    <a class="btn btn-warning" routerLink="/product/edit/{{product._id}}" title="Edit">Edit</a> &nbsp;
+                    <a class="btn btn-danger" (click)="delete(product._id)" title="Delete">Delete</a> &nbsp;
+                </td>
+              </tr>
+              <tr *ngIf="!products || products.length<=0">
+                <td colspan="7" class="text-center">No Products </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
